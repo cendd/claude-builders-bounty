@@ -1,64 +1,25 @@
-# [BOUNTY $50] CHANGELOG Generator
+# Claude Builders Bounty 🤖
 
-A simple bash script that generates a structured `CHANGELOG.md` from your git history.
+A community bounty board for Claude Code builders.
 
-> **Bounty Submission for Issue #1** — by @cendd
+Building with Claude Code? Have tasks to delegate? Want to get paid for contributing to AI projects? You're in the right place.
 
-## Setup (3 steps)
+## How it works
 
-1. **Download** the script:
-   ```bash
-   curl -O https://raw.githubusercontent.com/cendd/claude-builders-bounty/main/changelog.sh
-   ```
+**To post a bounty:**
+1. Open a GitHub issue with a clear description and acceptance criteria
+2. Comment `/opire set <amount>` in the issue to set the reward
+3. Share the link — contributors will find it
 
-2. **Make executable**:
-   ```bash
-   chmod +x changelog.sh
-   ```
+**To claim a bounty:**
+1. Browse the open issues below
+2. Comment `/opire try` in the issue you want to work on
+3. Submit a PR — payment is automatic on merge ✅
 
-3. **Run it** in your project:
-   ```bash
-   bash changelog.sh
-   ```
+## Active Bounties
 
-## Usage
+> Note: This is a community-run board. Bounties are funded by the issue creator. Always review the issue and acceptance criteria before starting work.
 
-```bash
-# Default: generates CHANGELOG.md in current directory
-bash changelog.sh
+---
 
-# Custom output file
-bash changelog.sh CHANGELOG.md
-
-# From a different repo directory
-bash changelog.sh CHANGELOG.md /path/to/repo
-```
-
-## Output
-
-Auto-categorizes commits into:
-| Category | Prefixes |
-|----------|----------|
-| **Added**  | `feat:`, `add:`, `feature:`, `new:` |
-| **Changed** | everything else (refactor, chore, docs, etc.) |
-| **Fixed**  | `fix:`, `bugfix:`, `hotfix:`, `bug:` |
-| **Removed** | `remove:`, `delete:`, `drop:`, `deprecate:` |
-
-Uses the latest git tag as baseline. Falls back to first commit if no tags exist.
-
-## Sample Output
-
-```markdown
-# Changelog
-
-## [v1.2.0] - 2026-05-24
-
-### Added
-- feat: add user authentication flow (a1b2c3d)
-
-### Changed
-- refactor: optimize database queries (i7j8k9l)
-
-### Fixed
-- fix: correct pagination offset (q3r4s5t)
-```
+*Built with ❤️ by the Claude Code community*
