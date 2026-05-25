@@ -62,3 +62,26 @@ Uses the latest git tag as baseline. Falls back to first commit if no tags exist
 ### Fixed
 - fix: correct pagination offset (q3r4s5t)
 ```
+\n\n---\n\n## claude-review — Claude Code PR Review Sub-Agent
+
+A CLI tool that analyzes GitHub PR diffs and returns structured Markdown reviews.
+
+### Installation
+
+```bash
+pip install requests
+```
+
+### Usage
+
+```bash
+# Via CLI
+python3 claude-review.py --pr https://github.com/owner/repo/pull/123
+
+# With GitHub token (for higher rate limits)
+GITHUB_TOKEN=ghp_xxx python3 claude-review.py --pr https://github.com/owner/repo/pull/123
+```
+
+### Sample Output
+
+See [SAMPLE_OUTPUT.md](SAMPLE_OUTPUT.md) for example reviews on real PRs.
