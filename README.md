@@ -1,64 +1,39 @@
-# [BOUNTY $50] CHANGELOG Generator
+# Pre-Tool-Use Hook: Block Dangerous Bash Commands
 
-A simple bash script that generates a structured `CHANGELOG.md` from your git history.
+A [Claude Code pre-tool-use hook](https://docs.anthropic.com/claude-code/hooks) that intercepts and blocks destructive bash commands before execution.
 
-> **Bounty Submission for Issue #1** — by @cendd
-
-## Setup (3 steps)
-
-1. **Download** the script:
-   ```bash
-   curl -O https://raw.githubusercontent.com/cendd/claude-builders-bounty/main/changelog.sh
-   ```
-
-2. **Make executable**:
-   ```bash
-   chmod +x changelog.sh
-   ```
-
-3. **Run it** in your project:
-   ```bash
-   bash changelog.sh
-   ```
-
-## Usage
+## 🚀 Installation (2 commands)
 
 ```bash
-# Default: generates CHANGELOG.md in current directory
-bash changelog.sh
-
-# Custom output file
-bash changelog.sh CHANGELOG.md
-
-# From a different repo directory
-bash changelog.sh CHANGELOG.md /path/to/repo
+mkdir -p ~/.claude/hooks
+curl -s https://raw.githubusercontent.com/cendd/claude-builders-bounty/main/pre-tool-use.sh -o ~/.claude/hooks/pre-tool-use && chmod +x ~/.claude/hooks/pre-tool-use
 ```
 
-## Output
+That's it! The hook activates on the next Claude Code session.
 
-Auto-categorizes commits into:
-| Category | Prefixes |
-|----------|----------|
-| **Added**  | `feat:`, `add:`, `feature:`, `new:` |
-| **Changed** | everything else (refactor, chore, docs, etc.) |
-| **Fixed**  | `fix:`, `bugfix:`, `hotfix:`, `bug:` |
-| **Removed** | `remove:`, `delete:`, `drop:`, `deprecate:` |
+## 🔒 Blocked Patterns
 
-Uses the latest git tag as baseline. Falls back to first commit if no tags exist.
+| Pattern | Example |
+|---------|---------|
+| Recursive delete | `rm -rf /`, `rm -rf --no-preserve-root` |
+| Database destruction | `DROP TABLE users`, `TRUNCATE TABLE orders` |
+| Force push | `git push --force origin main` |
+| Unsafe delete | `DELETE FROM users` (without WHERE) |
 
-## Sample Output
+## 📋 Logging
 
-```markdown
-# Changelog
+All blocked attempts are logged to `~/.claude/hooks/blocked.log` with:
+- Timestamp
+- Project path
+- Attempted command
 
-## [v1.2.0] - 2026-05-24
+## ⚡ Override
 
-### Added
-- feat: add user authentication flow (a1b2c3d)
-
-### Changed
-- refactor: optimize database queries (i7j8k9l)
-
-### Fixed
-- fix: correct pagination offset (q3r4s5t)
+If you're absolutely sure a command is safe, run with:
+```bash
+BLOCKING_OVERRIDE=1 your-command
 ```
+
+## ✅ Normal commands are NOT affected
+
+Safe commands like `ls`, `cp`, `mv`, `git add`, `git commit`, `pip install`, `npm run` pass through without any delay or modification.
